@@ -117,6 +117,9 @@ void LinkLoader::load()
                     AddressRow tempAR;
                     tempAR = initializeAddRow(tempAR);
                     tempAR.adr = currRow;
+
+                    if(tempAR.adr.size() < 5)
+                        tempAR.adr = "0" + tempAR.adr;
                     
                     int idx = toDec(recs.subHex(currAddr, currRow));
                     if(idx < 15)
