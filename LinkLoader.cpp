@@ -109,11 +109,14 @@ void LinkLoader::load()
                 string currAddr = recs.addHex(startAddr, toHex(byteCount));
 
                 string currRow = getCurrRow(currAddr, "0");
-                
-                if(mem.size() > 0)
-                    cout << "CURR CODE: " << text << "\t" << "CURR ROW: " << currRow << "\t" << "VALUE: " << recs.subHex(currRow, mem.back().adr)  << endl;
+                string lastrow;
 
-                if(mem.size() == 0 || toDec(recs.subHex(currRow, mem.back().adr)) > 0)
+                if(mem.size() == 0)
+                    lastrow = "00000";
+                else
+                    lastrow =  mem.back().adr;
+
+                if(mem.size() == 0 || toDec(recs.subHex(currRow, lastrow)) > 0)
                 {
 
                     AddressRow tempAR;
@@ -261,7 +264,6 @@ void LinkLoader::trimMemory()
 
     string end = recs.addHex(recs.estab[idx].csaddr, recs.estab[idx].length);
 
-    cout << "END ADDR: " << end << endl;
     for(int i = 0; i < mem.back().cells.size(); i++)
     {
         string currIdx = recs.addHex(mem.back().adr, toHex(i));
