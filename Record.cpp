@@ -22,12 +22,36 @@ Record::Record()
     //pathName = setPathName(path);
     //readFile(path);
 }
+/********************************************************************
+*** FUNCTION : addHex(string currL, string incr)                  ***
+*********************************************************************
+*** DESCRIPTION : returns the sum of two hexadecimal strings      ***
 
+*** INPUT ARGS : string, string                                   ***
+
+*** OUTPUT ARGS : string                                          ***
+
+*** IN/OUT ARGS : n/a                                             ***
+
+*** RETURN : n/a                                                  ***
+********************************************************************/
 Record::Record(string path)
 {
 
 }
+/********************************************************************
+*** FUNCTION : addHex(string currL, string incr)                  ***
+*********************************************************************
+*** DESCRIPTION : returns the sum of two hexadecimal strings      ***
 
+*** INPUT ARGS : string, string                                   ***
+
+*** OUTPUT ARGS : string                                          ***
+
+*** IN/OUT ARGS : n/a                                             ***
+
+*** RETURN : n/a                                                  ***
+********************************************************************/
 string Record::getPath()
 {
     string s;
@@ -37,13 +61,26 @@ string Record::getPath()
     return s;
 }
 
+/********************************************************************
+*** FUNCTION : addHex(string currL, string incr)                  ***
+*********************************************************************
+*** DESCRIPTION : returns the sum of two hexadecimal strings      ***
 
+*** INPUT ARGS : string, string                                   ***
+
+*** OUTPUT ARGS : string                                          ***
+
+*** IN/OUT ARGS : n/a                                             ***
+
+*** RETURN : n/a                                                  ***
+********************************************************************/
 void Record::readFile(string path)
 {
     ifstream inFile;
     string tLine;
     ObjProgram prog;
-
+    int textCount = 0;
+    int csectCount = 0;
     inFile.open(path);
 
     if(!inFile)
@@ -64,7 +101,19 @@ void Record::readFile(string path)
 }
 
 
+/********************************************************************
+*** FUNCTION : addHex(string currL, string incr)                  ***
+*********************************************************************
+*** DESCRIPTION : returns the sum of two hexadecimal strings      ***
 
+*** INPUT ARGS : string, string                                   ***
+
+*** OUTPUT ARGS : string                                          ***
+
+*** IN/OUT ARGS : n/a                                             ***
+
+*** RETURN : n/a                                                  ***
+********************************************************************/
 string Record::addHex(string currL, string incr)
 {
     stringstream ss1, ss2, ss3;
@@ -93,6 +142,19 @@ string Record::addHex(string currL, string incr)
     return result;
 }
 
+/********************************************************************
+*** FUNCTION : addHex(string currL, string incr)                  ***
+*********************************************************************
+*** DESCRIPTION : returns the sum of two hexadecimal strings      ***
+
+*** INPUT ARGS : string, string                                   ***
+
+*** OUTPUT ARGS : string                                          ***
+
+*** IN/OUT ARGS : n/a                                             ***
+
+*** RETURN : n/a                                                  ***
+********************************************************************/
 ObjProgram Record::parseRecord(string line, ObjProgram p)
 {
     if(line[0] == 'H')
@@ -165,7 +227,19 @@ ObjProgram Record::parseRecord(string line, ObjProgram p)
 }
 
 
+/********************************************************************
+*** FUNCTION : addHex(string currL, string incr)                  ***
+*********************************************************************
+*** DESCRIPTION : returns the sum of two hexadecimal strings      ***
 
+*** INPUT ARGS : string, string                                   ***
+
+*** OUTPUT ARGS : string                                          ***
+
+*** IN/OUT ARGS : n/a                                             ***
+
+*** RETURN : n/a                                                  ***
+********************************************************************/
 string Record::subHex(string currL, string decr)
 {
     stringstream ss1, ss2, ss3;
@@ -194,6 +268,19 @@ string Record::subHex(string currL, string decr)
     return result;
 }
 
+/********************************************************************
+*** FUNCTION : addHex(string currL, string incr)                  ***
+*********************************************************************
+*** DESCRIPTION : returns the sum of two hexadecimal strings      ***
+
+*** INPUT ARGS : string, string                                   ***
+
+*** OUTPUT ARGS : string                                          ***
+
+*** IN/OUT ARGS : n/a                                             ***
+
+*** RETURN : n/a                                                  ***
+********************************************************************/
 void Record::insert(ExtSymbol t)
 {
     // if a csect, look for the last csect in the vector.
@@ -241,6 +328,19 @@ void Record::insert(ExtSymbol t)
     estab.push_back(t);
 }
 
+/********************************************************************
+*** FUNCTION : addHex(string currL, string incr)                  ***
+*********************************************************************
+*** DESCRIPTION : returns the sum of two hexadecimal strings      ***
+
+*** INPUT ARGS : string, string                                   ***
+
+*** OUTPUT ARGS : string                                          ***
+
+*** IN/OUT ARGS : n/a                                             ***
+
+*** RETURN : n/a                                                  ***
+********************************************************************/
 void Record::printEstab()
 {
     cout << "CSECT" << setw(15) << "SYMBOL" << setw(15) << "ADDRESS" << setw(15) << "CSADDR" << setw(15) << "LDADDR" << setw(15) << "LENGTH" << endl;
@@ -252,6 +352,19 @@ void Record::printEstab()
     return;
 }
 
+/********************************************************************
+*** FUNCTION : addHex(string currL, string incr)                  ***
+*********************************************************************
+*** DESCRIPTION : returns the sum of two hexadecimal strings      ***
+
+*** INPUT ARGS : string, string                                   ***
+
+*** OUTPUT ARGS : string                                          ***
+
+*** IN/OUT ARGS : n/a                                             ***
+
+*** RETURN : n/a                                                  ***
+********************************************************************/
 void Record::printTR()
 {
     cout << "Text Records" << endl;
@@ -263,6 +376,19 @@ void Record::printTR()
     return;
 }
 
+/********************************************************************
+*** FUNCTION : addHex(string currL, string incr)                  ***
+*********************************************************************
+*** DESCRIPTION : returns the sum of two hexadecimal strings      ***
+
+*** INPUT ARGS : string, string                                   ***
+
+*** OUTPUT ARGS : string                                          ***
+
+*** IN/OUT ARGS : n/a                                             ***
+
+*** RETURN : n/a                                                  ***
+********************************************************************/
 void Record::printMR()
 {
     cout << "Mod Records" << endl;

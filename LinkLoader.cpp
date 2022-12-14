@@ -11,12 +11,36 @@ in popuating the symbol table and evaluating expressions based on the
 symbol table values.
 ********************************************************************/
 #include "LinkLoader.h"
+/********************************************************************
+*** FUNCTION : addHex(string currL, string incr)                  ***
+*********************************************************************
+*** DESCRIPTION : returns the sum of two hexadecimal strings      ***
 
+*** INPUT ARGS : string, string                                   ***
+
+*** OUTPUT ARGS : string                                          ***
+
+*** IN/OUT ARGS : n/a                                             ***
+
+*** RETURN : n/a                                                  ***
+********************************************************************/
 LinkLoader::LinkLoader()
 {
 
 }
+/********************************************************************
+*** FUNCTION : addHex(string currL, string incr)                  ***
+*********************************************************************
+*** DESCRIPTION : returns the sum of two hexadecimal strings      ***
 
+*** INPUT ARGS : string, string                                   ***
+
+*** OUTPUT ARGS : string                                          ***
+
+*** IN/OUT ARGS : n/a                                             ***
+
+*** RETURN : n/a                                                  ***
+********************************************************************/
 LinkLoader::LinkLoader(string path)
 {
     //recs.parseRecord(path);
@@ -25,20 +49,44 @@ LinkLoader::LinkLoader(string path)
     //modify();
     //display();
 }
+/********************************************************************
+*** FUNCTION : addHex(string currL, string incr)                  ***
+*********************************************************************
+*** DESCRIPTION : returns the sum of two hexadecimal strings      ***
 
+*** INPUT ARGS : string, string                                   ***
+
+*** OUTPUT ARGS : string                                          ***
+
+*** IN/OUT ARGS : n/a                                             ***
+
+*** RETURN : n/a                                                  ***
+********************************************************************/
 LinkLoader::LinkLoader(vector<string> paths)
 {
     for(string p : paths)
         recs.readFile(p);
     
+    recs.printEstab();
     load();
-    //modify();
     trimMemory();
     displayMemory();
     writeMemory();
 }
 
+/********************************************************************
+*** FUNCTION : addHex(string currL, string incr)                  ***
+*********************************************************************
+*** DESCRIPTION : returns the sum of two hexadecimal strings      ***
 
+*** INPUT ARGS : string, string                                   ***
+
+*** OUTPUT ARGS : string                                          ***
+
+*** IN/OUT ARGS : n/a                                             ***
+
+*** RETURN : n/a                                                  ***
+********************************************************************/
 void LinkLoader::load()
 {
     for(int i = 0; i < recs.progs.size(); i++)
@@ -88,7 +136,19 @@ void LinkLoader::load()
     return;
 }
 
+/********************************************************************
+*** FUNCTION : addHex(string currL, string incr)                  ***
+*********************************************************************
+*** DESCRIPTION : returns the sum of two hexadecimal strings      ***
 
+*** INPUT ARGS : string, string                                   ***
+
+*** OUTPUT ARGS : string                                          ***
+
+*** IN/OUT ARGS : n/a                                             ***
+
+*** RETURN : n/a                                                  ***
+********************************************************************/
 string LinkLoader::getCurrRow(string lastRow, string offset)
 {
     string res = recs.addHex(lastRow, offset);
@@ -98,12 +158,40 @@ string LinkLoader::getCurrRow(string lastRow, string offset)
     return res;
 }
 
+/********************************************************************
+*** FUNCTION : addHex(string currL, string incr)                  ***
+*********************************************************************
+*** DESCRIPTION : returns the sum of two hexadecimal strings      ***
+
+*** INPUT ARGS : string, string                                   ***
+
+*** OUTPUT ARGS : string                                          ***
+
+*** IN/OUT ARGS : n/a                                             ***
+
+*** RETURN : n/a                                                  ***
+********************************************************************/
 void LinkLoader::calcExecute()
 {
-    execAddr = (recs.addHex(recs.progs[0].tr[0].start, "02170"));
+    if(!recs.progs.empty() && !recs.progs[0].tr.empty())
+        execAddr = (recs.addHex(recs.progs[0].tr[0].start, "02170"));
+    else
+        execAddr = "02170";
 }
 
+/********************************************************************
+*** FUNCTION : addHex(string currL, string incr)                  ***
+*********************************************************************
+*** DESCRIPTION : returns the sum of two hexadecimal strings      ***
 
+*** INPUT ARGS : string, string                                   ***
+
+*** OUTPUT ARGS : string                                          ***
+
+*** IN/OUT ARGS : n/a                                             ***
+
+*** RETURN : n/a                                                  ***
+********************************************************************/
 void LinkLoader::writeMemory()
 {
     ofstream outFile;
@@ -134,6 +222,19 @@ void LinkLoader::writeMemory()
     return;
 }
 
+/********************************************************************
+*** FUNCTION : addHex(string currL, string incr)                  ***
+*********************************************************************
+*** DESCRIPTION : returns the sum of two hexadecimal strings      ***
+
+*** INPUT ARGS : string, string                                   ***
+
+*** OUTPUT ARGS : string                                          ***
+
+*** IN/OUT ARGS : n/a                                             ***
+
+*** RETURN : n/a                                                  ***
+********************************************************************/
 void LinkLoader::trimMemory()
 {
     //get last csect
@@ -165,6 +266,19 @@ void LinkLoader::trimMemory()
     return;
 }
 
+/********************************************************************
+*** FUNCTION : addHex(string currL, string incr)                  ***
+*********************************************************************
+*** DESCRIPTION : returns the sum of two hexadecimal strings      ***
+
+*** INPUT ARGS : string, string                                   ***
+
+*** OUTPUT ARGS : string                                          ***
+
+*** IN/OUT ARGS : n/a                                             ***
+
+*** RETURN : n/a                                                  ***
+********************************************************************/
 void LinkLoader::modify()
 {
     for(int i = 0; i < recs.progs.size(); i++)
@@ -199,7 +313,19 @@ void LinkLoader::modify()
     return;
 }
 
+/********************************************************************
+*** FUNCTION : addHex(string currL, string incr)                  ***
+*********************************************************************
+*** DESCRIPTION : returns the sum of two hexadecimal strings      ***
 
+*** INPUT ARGS : string, string                                   ***
+
+*** OUTPUT ARGS : string                                          ***
+
+*** IN/OUT ARGS : n/a                                             ***
+
+*** RETURN : n/a                                                  ***
+********************************************************************/
 int LinkLoader::toDec(string hexIn)
 {
     stringstream ss;
@@ -209,6 +335,20 @@ int LinkLoader::toDec(string hexIn)
     return x;
 }
 
+
+/********************************************************************
+*** FUNCTION : addHex(string currL, string incr)                  ***
+*********************************************************************
+*** DESCRIPTION : returns the sum of two hexadecimal strings      ***
+
+*** INPUT ARGS : string, string                                   ***
+
+*** OUTPUT ARGS : string                                          ***
+
+*** IN/OUT ARGS : n/a                                             ***
+
+*** RETURN : n/a                                                  ***
+********************************************************************/
 string LinkLoader::toHex(int in)
 {
     stringstream ss;
@@ -219,6 +359,20 @@ string LinkLoader::toHex(int in)
     return res;
 }
 
+
+/********************************************************************
+*** FUNCTION : addHex(string currL, string incr)                  ***
+*********************************************************************
+*** DESCRIPTION : returns the sum of two hexadecimal strings      ***
+
+*** INPUT ARGS : string, string                                   ***
+
+*** OUTPUT ARGS : string                                          ***
+
+*** IN/OUT ARGS : n/a                                             ***
+
+*** RETURN : n/a                                                  ***
+********************************************************************/
 AddressRow LinkLoader::initializeAddRow(AddressRow tempRow)
 {
     for(int i = 0; i < 16; i++)
@@ -227,6 +381,20 @@ AddressRow LinkLoader::initializeAddRow(AddressRow tempRow)
     return tempRow;
 }
 
+
+/********************************************************************
+*** FUNCTION : addHex(string currL, string incr)                  ***
+*********************************************************************
+*** DESCRIPTION : returns the sum of two hexadecimal strings      ***
+
+*** INPUT ARGS : string, string                                   ***
+
+*** OUTPUT ARGS : string                                          ***
+
+*** IN/OUT ARGS : n/a                                             ***
+
+*** RETURN : n/a                                                  ***
+********************************************************************/
 void LinkLoader::displayRow(AddressRow tempRow)
 {
     cout << setw(10) << tempRow.adr << setw(10);
@@ -239,6 +407,20 @@ void LinkLoader::displayRow(AddressRow tempRow)
     return;
 }
 
+
+/********************************************************************
+*** FUNCTION : addHex(string currL, string incr)                  ***
+*********************************************************************
+*** DESCRIPTION : returns the sum of two hexadecimal strings      ***
+
+*** INPUT ARGS : string, string                                   ***
+
+*** OUTPUT ARGS : string                                          ***
+
+*** IN/OUT ARGS : n/a                                             ***
+
+*** RETURN : n/a                                                  ***
+********************************************************************/
 void LinkLoader::displayMemory()
 {
     cout << setw(10) << "ADDRESS" << setw(10) << "0" << setw(5) << "1" << setw(5) << "2" << setw(5) << "3" << setw(5) << "4" << setw(5) << "5" << setw(5)
