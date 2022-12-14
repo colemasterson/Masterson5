@@ -69,6 +69,7 @@ LinkLoader::LinkLoader(vector<string> paths)
     
     recs.printEstab();
     load();
+    modify();
     trimMemory();
     displayMemory();
     writeMemory();
@@ -287,7 +288,7 @@ void LinkLoader::modify()
         for(ModRecord m : recs.progs[i].mr)
         {
             //calculate relative address(mr addr + csaddr)
-
+            bool isf4 = false;
             string relAddr = recs.addHex(m.addr, recs.progs[i].csect.csaddr);
 
             string relRow = getCurrRow(relAddr, "0");
@@ -302,9 +303,29 @@ void LinkLoader::modify()
                     first4 = mem[i].cells[idx] + mem[i].cells[idx + 1];
                     
                     if(first4.at(2) == '1')
+                    {isf4 = true;
                         ogAddr = mem[i].cells[idx] + mem[i].cells[idx + 1] + mem[i].cells[idx + 2] + mem[i].cells[idx + 3];
+                    }
                     else
-                        ogAddr = mem[i].cells[idx] + mem[i].cells[idx + 1] + mem[i].cells[idx + 2];   
+                        ogAddr = mem[i].cells[idx] + mem[i].cells[idx + 1] + mem[i].cells[idx + 2];
+
+                    string changed = recs.addHex(ogAddr, recs.progs[i].csect.csaddr);
+
+                    if(isf4)
+                    {
+                        mem[i].cells[idx] = changed.substr(0, 2);
+                        mem[i].cells[idx+1] = changed.substr(2, 2);
+                        mem[i].cells[idx+2] = changed.substr(4, 2);
+                        mem[i].cells[idx+3] = changed.substr(6, 2); 
+                    }
+                    else
+                    {
+                        mem[i].cells[idx] = changed.substr(0, 2);
+                        mem[i].cells[idx+1] = changed.substr(2, 2);
+                        mem[i].cells[idx+2] = changed.substr(4, 2);  
+                    }
+
+
                 }
             }
 
