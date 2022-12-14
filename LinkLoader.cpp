@@ -263,12 +263,14 @@ void LinkLoader::trimMemory()
     }
 
     string end = recs.addHex(recs.estab[idx].csaddr, recs.estab[idx].length);
+    cout << "END VALUE " << end << endl;
 
-    for(int i = 0; i < mem.back().cells.size(); i++)
+    int endIdx = toDec(recs.subHex(end, mem.back().adr));
+    for(int i = endIdx; i < mem.back().cells.size(); i++)
     {
         string currIdx = recs.addHex(mem.back().adr, toHex(i));
 
-        if(toDec(recs.subHex(end, currIdx)) < 0)
+        if(toDec(recs.subHex(end, currIdx)) >= 0)
             mem.back().cells.at(i) = "";
     }
 
